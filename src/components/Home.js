@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <Col md={4} variant="danger">
       <Row>
-          <h2>Test!</h2>
+          <h2>Test2!</h2>
       </Row>
     </Col>
   );
