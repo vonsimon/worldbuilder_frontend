@@ -8,6 +8,7 @@ const AuthState = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
   useEffect(() => authToken && setIsAuthenticated(true), [authToken]);
 
   const signUp = async data => {
@@ -19,11 +20,12 @@ const AuthState = ({ children }) => {
     try {
       setLoading(true);
       const {
-        data: { token }
+        data: { token, user }
       } = await axios.post(`${process.env.REACT_APP_BLOG_API}/auth/signup`, data);
       localStorage.setItem('token', token);
       setIsAuthenticated(true);
       setLoading(false);
+      setCurrentUser(user);
     } catch (error) {
       if (error.response) {
         setError(error.response.data.error);
@@ -41,11 +43,12 @@ const AuthState = ({ children }) => {
     try {
       setLoading(true);
       const {
-        data: { token }
+        data: { token, user }
       } = await axios.post(`${process.env.REACT_APP_BLOG_API}/auth/signin`, data);
       localStorage.setItem('token', token);
       setIsAuthenticated(true);
       setLoading(false);
+      setCurrentUser(user);
     } catch (error) {
       if (error.response) {
         setError(error.response.data.error);
@@ -65,7 +68,7 @@ const AuthState = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ loading, isAuthenticated, error, signUp, signIn, signOut }}>
+    <AuthContext.Provider value={{ loading, isAuthenticated, error, signUp, signIn, signOut, currentUser }}>
       {children}
     </AuthContext.Provider>
   );

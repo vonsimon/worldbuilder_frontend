@@ -28,7 +28,7 @@ const LogIn = () => {
     return (
       <Redirect
         to={{
-          pathname: location.state ? location.state.next : '/',
+          pathname: location.state ? location.state.next : '/user-area',
           from: location.pathname
         }}
       />

@@ -30,11 +30,12 @@ const Register = () => {
     return (
       <Redirect
         to={{
-          pathname: location.state ? location.state.next : '/',
+          pathname: location.state ? location.state.next : '/user-area',
           from: location.pathname
         }}
       />
     );
+
   if (loading) return <Spinner animation='border' variant='primary' />;
   return (
     <Col md={4}>
