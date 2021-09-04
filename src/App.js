@@ -6,6 +6,9 @@ import Register from "./components/Register.js";
 import Navigation from "./components/Navigation.js";
 import LogIn from "./components/LogIn.js";
 import UserArea from "./components/UserArea.js";
+import Setting from "./components/Setting.js"
+import SingleSetting from "./components/SingleSetting";
+import Library from "./components/Library.js";
 import ProtectedRoute from "./components/ProtectedRoute.js";
 import AuthState from "./context/AuthContext.js";
 import SettingState from './context/SettingContext';
@@ -23,7 +26,10 @@ const App = () => {
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={LogIn} />
                 <SettingState>
-                  <ProtectedRoute exact path='/user-area' component={UserArea}/>
+                  <ProtectedRoute exact path='/user-area' component={UserArea} />
+                  <ProtectedRoute exact path='/singlesetting' component={SingleSetting} />
+                  <ProtectedRoute exact path='/setting' component={Setting} />
+                  <ProtectedRoute exact path='/library' component={Library} />
                 </SettingState>
               </Switch>
             </Row>

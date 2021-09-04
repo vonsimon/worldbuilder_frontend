@@ -1,4 +1,4 @@
-import { useState, createContext } from 'react';
+import { useState, createContext, useEffect } from 'react';
 import axios from 'axios';
 
 export const SettingContext = createContext();
@@ -7,7 +7,9 @@ const SettingState = ({ children }) => {
   const authToken = localStorage.getItem('token');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [isSubmitted, setIsSubmitted] = useState(false); //ergänzt
   const [currentSetting, setCurrentSetting] = useState(null);
+  useEffect(() => authToken && setIsSubmitted(true), [authToken]); //ergänzt
 
   const postSetting = async data => {
     if (!(data.title && data.description && data.image)) {
@@ -22,7 +24,9 @@ const SettingState = ({ children }) => {
         data: { newSetting }
       } = await axios.post(`${process.env.REACT_APP_BLOG_API}/settings`, data, {headers: {'authorization': `${authToken}`}});
       setCurrentSetting(newSetting);
+      setIsSubmitted(true); // ergänzt
       setLoading(false);
+
     } catch (error) {
       if (error.response) {
         setError(error.response.data.error);
@@ -37,10 +41,10 @@ const SettingState = ({ children }) => {
   };
 
   return (
-    <SettingContext.Provider value={{ loading, error, currentSetting, postSetting }}>
+    <SettingContext.Provider value={{ loading, error, currentSetting, postSetting, isSubmitted }}>
       {children}
-    </SettingContext.Provider>
-  );
+    </SettingContext.Provider>)
+    ;
 };
 
 export default SettingState;

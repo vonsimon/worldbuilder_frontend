@@ -1,12 +1,13 @@
 import { useState, useContext } from "react";
 import { useForm } from 'react-hook-form';
+import { Redirect } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
-import Map from './Maps';
+import Map from './Maps.js';
 import { SettingContext } from "../context/SettingContext";
 
 
@@ -20,7 +21,8 @@ const UserArea = () => {
     bounds: [[0,0],[150,250]]
   })
   const [showSettings, setShowSettings] = useState(false)
-  const { postSetting } = useContext(SettingContext);
+ 
+  const { postSetting, isSubmitted } = useContext(SettingContext);
 
   const defaultValues = {
     title: '',
@@ -36,7 +38,14 @@ const UserArea = () => {
   const onSubmit = data => { 
     postSetting(data);
     setShowSettings(false);
-  }
+    <Redirect to='/setting' />
+    }
+
+ 
+
+
+
+
 
   return (
     <>
@@ -89,6 +98,7 @@ const UserArea = () => {
           </Form>
         </Modal.Body>
       </Modal>
+      
 
       <Row className="justify-content-center">
         <Col md={3}>
