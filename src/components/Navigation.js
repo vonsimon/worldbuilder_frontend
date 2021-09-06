@@ -8,33 +8,33 @@ import { AuthContext } from "../context/AuthContext";
 const Navigation = () => {
   const { isAuthenticated, signOut } = useContext(AuthContext);
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="dark" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/">
-          World Builder
+          <span className="text-light"> World Builder </span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Link as={NavLink} to="/" exact>
-              Home
+              <span className="text-light"> Home </span>
             </Nav.Link>
             {isAuthenticated ? (
-             <>
-             <Nav.Link as={NavLink} to="/user-area" exact>
-              Dahsboard
-           </Nav.Link>
-           <Nav.Link onClick={signOut}>
-              Log out
-           </Nav.Link>
-             </>
+              <>
+                <Nav.Link as={NavLink} to="/user-area" exact>
+                  <span className="text-light">Dashboard</span>
+                </Nav.Link>
+                <Nav.Link onClick={signOut}>
+                  <span className="text-light"> Log out</span>
+                </Nav.Link>
+              </>
             ) : (
               <>
                 <Nav.Link as={NavLink} to="/register" exact>
-                  Register
+                  <span className="text-light">Register</span>
                 </Nav.Link>
                 <Nav.Link as={NavLink} to="/login" exact>
-                  Log in
+                  <span className="text-light">Log in</span>
                 </Nav.Link>
               </>
             )}

@@ -17,7 +17,9 @@ const App = () => {
   return (
     <>
       <AuthState>
-          <Navigation />
+        <div style={{
+          backgroundColor: '#293133', minHeight: '100vh'}} expand='lg' > 
+          <Navigation /> 
           <Container>
             <Row>
               <Switch>
@@ -32,6 +34,7 @@ const App = () => {
               </Switch>
             </Row>
           </Container>
+        </div>
       </AuthState>
     </>
   );
