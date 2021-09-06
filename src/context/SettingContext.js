@@ -4,20 +4,19 @@ import axios from 'axios';
 export const SettingContext = createContext();
 
 const SettingState = ({ children }) => {
-  const authToken = localStorage.getItem("token");
+  const authToken = localStorage.getItem('token');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [isSubmitted, setIsSubmitted] = useState(false); //ergänzt
+  const [isSubmitted, setIsSubmitted] = useState(false); //ergÃ¤nzt
   const [currentSetting, setCurrentSetting] = useState(null);
-  useEffect(() => authToken && setIsSubmitted(true), [authToken]); //ergänzt
+  useEffect(() => authToken && setIsSubmitted(true), [authToken]); //ergÃ¤nzt
 
-  const getSingleSetting = async (id) => {
+  const getSingleSetting = async id => {
     try {
       setLoading(true);
-      const { data: setting } = await axios.get(
-        `${process.env.REACT_APP_BLOG_API}/settings/${id}`,
-        { headers: { authorization: `${authToken}` } }
-      );
+      const { data: setting } = await axios.get(`${process.env.REACT_APP_BLOG_API}/settings/${id}`, {
+        headers: { authorization: `${authToken}` }
+      });
       setCurrentSetting(setting);
       setLoading(false);
     } catch (error) {
@@ -33,18 +32,15 @@ const SettingState = ({ children }) => {
     }
   };
 
-  const postSetting = async (data) => {
+  const postSetting = async data => {
     try {
       setLoading(true);
-      const { data: newSetting } = await axios.post(
-        `${process.env.REACT_APP_BLOG_API}/settings`,
-        data,
-        { headers: { authorization: `${authToken}` } }
-      );
+      const { data: newSetting } = await axios.post(`${process.env.REACT_APP_BLOG_API}/settings`, data, {
+        headers: { authorization: `${authToken}` }
+      });
       setCurrentSetting(newSetting);
-      setIsSubmitted(true); // ergänzt
+      setIsSubmitted(true); // ergÃ¤nzt
       setLoading(false);
-
     } catch (error) {
       if (error.response) {
         setError(error.response.data.error);
@@ -58,23 +54,16 @@ const SettingState = ({ children }) => {
     }
   };
 
-  const createMap = async (data) => {
-   /*  const mock = {
-      setting: currentSetting._id,
-      type: "",
-      title: "",
-      description: "",
-      image: "",
-      plane: "",
-    }; */
+  const createMap = async data => {
+    console.log(currentSetting._id);
     try {
       setLoading(true);
       const { data: newMap } = await axios.post(
         `${process.env.REACT_APP_BLOG_API}/map`,
-        {setting: currentSetting._id, ...data},
+        { setting: currentSetting._id, ...data },
         { headers: { authorization: `${authToken}` } }
       );
-      setCurrentSetting((prev) => ({ ...prev, maps: [newMap, ...prev.maps] }));
+      setCurrentSetting(prev => ({ ...prev, maps: [newMap, ...prev.maps] }));
       setLoading(false);
     } catch (error) {
       if (error.response) {
@@ -98,12 +87,12 @@ const SettingState = ({ children }) => {
         setCurrentSetting,
         postSetting,
         getSingleSetting,
-        createMap,
+        createMap
       }}
     >
       {children}
-    </SettingContext.Provider>)
-    ;
+    </SettingContext.Provider>
+  );
 };
 
 export default SettingState;
