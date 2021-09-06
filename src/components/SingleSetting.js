@@ -55,9 +55,8 @@ const SingleSetting = () => {
     return () => setCurrentSetting(null);
   }, [id]);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    createMap();
+  const onSubmit = (data) => {
+    createMap(data);
     setShowSettings(false);
   };
 
@@ -74,10 +73,9 @@ const SingleSetting = () => {
             Add map to current setting
           </Modal.Title>
         </Modal.Header>
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Modal.Body>
             {/*<----------------------------Adapt Form Start----------------------------->*/}
-            <Form onSubmit={handleSubmit(onSubmit)}>
               {/* <Row>{error && <Alert variant='danger'>{error}</Alert>}</Row> */}
               <Row>
                 <Form.Group className="mb-3">
@@ -118,33 +116,13 @@ const SingleSetting = () => {
                   )}
                 </Form.Group>
                 <Form.Group className="mb-3">
-                  <Form.Label>Plane</Form.Label>
-                 {/* <Form.Control
-                    as="select"
-                    custom
-                    {...register("plane", {
-                        required: "Plane is required",
-                      })}
-                    onChange={this.handleSubmit.bind(this)}
-                   
-                  >
-                    <option value="Galaxy">Galaxy</option>
-                    <option value="Solar System">Solar System</option>
-                    <option value="Planet">Planet</option>
-                    <option value="Continent">Continent</option>
-                    <option value="Country">Country</option>
-                    <option value="City">City</option>
-                    <option value="Building">Building</option>
-                    </Form.Control> */}
-                  {errors.plane && (
-                    <Alert variant="danger">{errors.plane.message}</Alert>
+                  <Form.Label>Image URL</Form.Label>
+                 
+                  {errors.image && (
+                    <Alert variant="danger">{errors.image.message}</Alert>
                   )}
                 </Form.Group>
               </Row>
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
-            </Form>
 
             {/*<----------------------------Adapt Form End----------------------------->*/}
           </Modal.Body>

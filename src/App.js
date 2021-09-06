@@ -6,6 +6,8 @@ import Register from "./components/Register.js";
 import Navigation from "./components/Navigation.js";
 import LogIn from "./components/LogIn.js";
 import UserArea from "./components/UserArea.js";
+import Setting from "./components/Setting.js"
+import Library from "./components/Library.js";
 import ProtectedRoute from "./components/ProtectedRoute.js";
 import CreateSetting from "./components/CreateSetting.js";
 import SingleSetting from "./components/SingleSetting.js";
@@ -30,6 +32,8 @@ const App = () => {
                   <ProtectedRoute exact path='/user-area' component={UserArea}/>
                   <ProtectedRoute exact path='/create-setting' component={CreateSetting}/>
                   <ProtectedRoute exact path='/setting/:id' component={SingleSetting}/>
+                  <ProtectedRoute exact path='/setting' component={Setting} />
+                  <ProtectedRoute exact path='/library' component={Library} />
                 </SettingState>
               </Switch>
             </Row>

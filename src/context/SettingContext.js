@@ -1,5 +1,5 @@
-import { useState, createContext } from "react";
-import axios from "axios";
+import { useState, createContext, useEffect } from 'react';
+import axios from 'axios';
 
 export const SettingContext = createContext();
 
@@ -7,7 +7,9 @@ const SettingState = ({ children }) => {
   const authToken = localStorage.getItem("token");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [isSubmitted, setIsSubmitted] = useState(false); //ergänzt
   const [currentSetting, setCurrentSetting] = useState(null);
+  useEffect(() => authToken && setIsSubmitted(true), [authToken]); //ergänzt
 
   const getSingleSetting = async (id) => {
     try {
@@ -40,7 +42,9 @@ const SettingState = ({ children }) => {
         { headers: { authorization: `${authToken}` } }
       );
       setCurrentSetting(newSetting);
+      setIsSubmitted(true); // ergänzt
       setLoading(false);
+
     } catch (error) {
       if (error.response) {
         setError(error.response.data.error);
@@ -55,19 +59,19 @@ const SettingState = ({ children }) => {
   };
 
   const createMap = async (data) => {
-    const mock = {
+   /*  const mock = {
       setting: currentSetting._id,
       type: "",
       title: "",
       description: "",
       image: "",
       plane: "",
-    };
+    }; */
     try {
       setLoading(true);
       const { data: newMap } = await axios.post(
         `${process.env.REACT_APP_BLOG_API}/map`,
-        mock,
+        {setting: currentSetting._id, ...data},
         { headers: { authorization: `${authToken}` } }
       );
       setCurrentSetting((prev) => ({ ...prev, maps: [newMap, ...prev.maps] }));
@@ -98,8 +102,8 @@ const SettingState = ({ children }) => {
       }}
     >
       {children}
-    </SettingContext.Provider>
-  );
+    </SettingContext.Provider>)
+    ;
 };
 
 export default SettingState;

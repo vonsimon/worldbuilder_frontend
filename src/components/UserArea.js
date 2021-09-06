@@ -1,13 +1,14 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import Form from "react-bootstrap/Form";
+import { useState, useContext } from "react";
+import { useForm } from 'react-hook-form';
+import { Redirect, Link } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
-import Map from "./Maps";
+import Map from './Maps.js';
+import { SettingContext } from "../context/SettingContext";
 
 const UserArea = () => {
   const [map1, setMap1] = useState({
