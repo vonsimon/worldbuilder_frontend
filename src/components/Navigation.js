@@ -21,8 +21,8 @@ const Navigation = () => {
             </Nav.Link>
             {isAuthenticated ? (
              <>
-             <Nav.Link>
-              Welcome back
+             <Nav.Link as={NavLink} to="/user-area" exact>
+              Dahsboard
            </Nav.Link>
            <Nav.Link onClick={signOut}>
               Log out

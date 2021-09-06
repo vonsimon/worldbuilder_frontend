@@ -9,17 +9,32 @@ const SettingState = ({ children }) => {
   const [error, setError] = useState(null);
   const [currentSetting, setCurrentSetting] = useState(null);
 
-  const postSetting = async data => {
-    if (!(data.title && data.description && data.image)) {
-      setError('Title, Description and Image URL must be set');
-      setTimeout(() => setError(null), 3000);
-      return;
-    }
-
+  const getSingleSetting = async id => {
     try {
       setLoading(true);
       const {
-        data: { newSetting }
+        data: setting
+      } = await axios.get(`${process.env.REACT_APP_BLOG_API}/settings/${id}`,  {headers: {'authorization': `${authToken}`}});
+      setCurrentSetting(setting);
+      setLoading(false);
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data.error);
+        setTimeout(() => setError(null), 3000);
+        setLoading(false);
+      } else {
+        setError(error.message);
+        setTimeout(() => setError(null), 3000);
+        setLoading(false);
+      }
+    }
+  };
+
+  const postSetting = async data => {
+    try {
+      setLoading(true);
+      const {
+        data: newSetting
       } = await axios.post(`${process.env.REACT_APP_BLOG_API}/settings`, data, {headers: {'authorization': `${authToken}`}});
       setCurrentSetting(newSetting);
       setLoading(false);
@@ -36,8 +51,38 @@ const SettingState = ({ children }) => {
     }
   };
 
+  const createMap = async data => {
+    const mock = { 
+      "setting": currentSetting._id,
+       "type": "Tupperware",
+       "title": "Mars",
+       "description": "Water",
+       "image": "https://static.wikia.nocookie.net/swgemulator/images/5/50/Naboo.jpg/revision/latest?cb=20120519144921",
+       "plane": "Planet"
+     }
+    try {
+      setLoading(true);
+      const {
+        data: newMap
+      } = await axios.post(`${process.env.REACT_APP_BLOG_API}/map`, mock, {headers: {'authorization': `${authToken}`}});
+      setCurrentSetting(prev => ({...prev, maps: [newMap,...prev.maps]}));
+      setLoading(false);
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data.error);
+        setTimeout(() => setError(null), 3000); 
+        setLoading(false);
+      } else {
+        setError(error.message);
+        setTimeout(() => setError(null), 3000);
+        setLoading(false);
+      }
+    }
+  };
+  
+
   return (
-    <SettingContext.Provider value={{ loading, error, currentSetting, postSetting }}>
+    <SettingContext.Provider value={{ loading, error, currentSetting,setCurrentSetting,  postSetting, getSingleSetting, createMap }}>
       {children}
     </SettingContext.Provider>
   );
