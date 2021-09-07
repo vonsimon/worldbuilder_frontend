@@ -45,21 +45,24 @@ const Library = () => {
   if (loading) return <Spinner animation="border" variant="primary" />;
   return settings.map((setting) => (
     <Col md={4} className="mb-4" key={setting._id}>
-      <Card style={{ height: "100%" }}>
+      <span><br /></span>
+      <Card style={{
+              backgroundColor: "#9da5a8",
+              height: "100%",
+            }}
+            className="border border-dark">
         <Card.Body>
           <Card.Title>
             {setting.title} <Badge bg="success">{setting.plane}</Badge>
           </Card.Title>
-          <Card.Img variant="top" src={setting.image} alt={setting.title} />
+          <Card.Img variant="top" className="border border-dark" src={setting.image} alt={setting.title} />
           <Card.Text>
             <h5>Description: {setting.description}</h5>
           </Card.Text>
-        </Card.Body>
-        <Card.Footer>
-          <Button variant="primary" as={Link} to={`/setting/${setting._id}`}>
+          <Button style={{display: 'flex', justifyContent: 'center'}} variant="primary" as={Link} to={`/setting/${setting._id}`} fluid>
             More
           </Button>
-        </Card.Footer>
+          </Card.Body>
       </Card>
     </Col>
   ));

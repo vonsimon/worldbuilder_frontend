@@ -55,10 +55,12 @@ const SingleSetting = () => {
     setShowSettings(false);
   };
 
-
   return !loading && currentSetting ? (
     <Row>
-      <Modal
+      <Modal style={{
+            backgroundColor: "#0000",
+          }}
+        
         size="xl"
         show={showSettings}
         onHide={() => {
@@ -68,18 +70,19 @@ const SingleSetting = () => {
         dialogClassName="modal-90w"
         aria-labelledby="example-custom-modal-styling-title"
       >
-        <Modal.Header closeButton>
-          <Modal.Title id="example-custom-modal-styling-title">
+        <Modal.Header closeButton
+        >
+          <Modal.Title id="example-custom-modal-styling-title" >
             Add map to current setting
           </Modal.Title>
         </Modal.Header>
-        <Row>
+        <Row className="justify-content-center">
           <Col>
             <Form onSubmit={handleSubmit(onSubmit)}>
               <Modal.Body>
                 <Row>{error && <Alert variant="danger">{error}</Alert>}</Row>
                 <Row>
-                  <Form.Group className="mb-3">
+                  <Form.Group className="mb-3" >
                     <Form.Label>Title</Form.Label>
                     <Form.Control
                       type="text"
@@ -146,14 +149,28 @@ const SingleSetting = () => {
                   </Form.Group>
                   <Form.Group className="mb-3">
                     <Form.Label>Bounds X</Form.Label>
-                    <Form.Control type='range' min={100} max={1000} {...register("boundsX", { required: "Horizontal bounds are required" })} />
+                    <Form.Control
+                      type="range"
+                      min={100}
+                      max={1000}
+                      {...register("boundsX", {
+                        required: "Horizontal bounds are required",
+                      })}
+                    />
                     {errors.image && (
                       <Alert variant="danger">{errors.image.message}</Alert>
                     )}
                   </Form.Group>
                   <Form.Group className="mb-3">
                     <Form.Label>Bounds Y</Form.Label>
-                    <Form.Control type='range' min={100} max={1000}{...register("boundsY", { required: "Horizontal bounds are required" })}/>
+                    <Form.Control
+                      type="range"
+                      min={100}
+                      max={1000}
+                      {...register("boundsY", {
+                        required: "Horizontal bounds are required",
+                      })}
+                    />
                     {errors.image && (
                       <Alert variant="danger">{errors.image.message}</Alert>
                     )}
@@ -180,7 +197,7 @@ const SingleSetting = () => {
                 url={watchImage}
                 bounds={[
                   [0, 0],
-                  [ parseInt(watchBoundsY),parseInt(watchBoundsX)],
+                  [parseInt(watchBoundsY), parseInt(watchBoundsX)],
                 ]}
               />
             ) : (
@@ -189,20 +206,27 @@ const SingleSetting = () => {
           </Col>
         </Row>
       </Modal>
-      <h1 className="text-light">{currentSetting.title}</h1>
-      <br />
-      <br />
-      <br />
-      <p className="text-light">{currentSetting.description}</p>
-      {/*<p className="text-light">{currentSetting.plane}</p>*/}
-      <img
-        className="text-light"
-        src={currentSetting.image}
-        alt={currentSetting.title}
-        height={"auto"}
-      />
       <Row>
-        <Col style={{ height: "2rem" }}></Col>
+        <span>
+          <br />
+        </span>
+        <h1 className="text-dark">{currentSetting.title}</h1>
+        <img
+          className="text-dark"
+          src={currentSetting.image}
+          alt={currentSetting.title}
+          height={"auto"}
+        />
+        <span>
+          <br />
+        </span>
+      </Row>
+      <Row>
+      <p className="text-dark">{currentSetting.description}</p>
+        {/*<p className="text-light">{currentSetting.plane}</p>*/}
+        <span>
+          <br />
+        </span>
       </Row>
       <Row>
         <Col></Col>
