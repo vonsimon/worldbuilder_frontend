@@ -43,8 +43,7 @@ const Register = () => {
         <Col></Col>
         <Col>
           <br />
-
-          {/*<Row>{error && <Alert variant='danger'>{error}</Alert>}</Row>*/}
+          <Row>{error && <Alert variant="danger">{error}</Alert>}</Row>
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>
               {" "}

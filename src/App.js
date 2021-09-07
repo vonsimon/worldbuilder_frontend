@@ -6,22 +6,28 @@ import Register from "./components/Register.js";
 import Navigation from "./components/Navigation.js";
 import LogIn from "./components/LogIn.js";
 import UserArea from "./components/UserArea.js";
-import Setting from "./components/Setting.js"
+import Setting from "./components/Setting.js";
 import Library from "./components/Library.js";
+import SingleMap from "./components/SingleMap.js";
 import ProtectedRoute from "./components/ProtectedRoute.js";
 import CreateSetting from "./components/CreateSetting.js";
 import SingleSetting from "./components/SingleSetting.js";
 import AuthState from "./context/AuthContext.js";
-import SettingState from './context/SettingContext';
-import './App.css'
+import SettingState from "./context/SettingContext";
+import "./App.css";
 
 const App = () => {
   return (
     <>
       <AuthState>
-        <div style={{
-          backgroundColor: '#293133', minHeight: '100vh'}} expand='lg' > 
-          <Navigation /> 
+        <div
+          style={{
+            backgroundColor: "#293133",
+            minHeight: "100vh",
+          }}
+          expand="lg"
+        >
+          <Navigation />
           <Container>
             <Row>
               <Switch>
@@ -29,11 +35,24 @@ const App = () => {
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={LogIn} />
                 <SettingState>
-                  <ProtectedRoute exact path='/user-area' component={UserArea}/>
-                  <ProtectedRoute exact path='/create-setting' component={CreateSetting}/>
-                  <ProtectedRoute exact path='/setting/:id' component={SingleSetting}/>
-                  <ProtectedRoute exact path='/setting' component={Setting} />
-                  <ProtectedRoute exact path='/library' component={Library} />
+                  <ProtectedRoute
+                    exact
+                    path="/user-area"
+                    component={UserArea}
+                  />
+                  <ProtectedRoute
+                    exact
+                    path="/create-setting"
+                    component={CreateSetting}
+                  />
+                  <ProtectedRoute
+                    exact
+                    path="/setting/:id"
+                    component={SingleSetting}
+                  />
+                  <ProtectedRoute exact path="/setting" component={Setting} />
+                  <ProtectedRoute exact path="/library" component={Library} />
+                  <ProtectedRoute exact path="/map/:id" component={SingleMap} />
                 </SettingState>
               </Switch>
             </Row>

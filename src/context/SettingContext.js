@@ -55,12 +55,19 @@ const SettingState = ({ children }) => {
   };
 
   const createMap = async data => {
-    console.log(currentSetting._id);
+    const myMapData = {
+      setting: currentSetting._id, 
+      title: data.title,
+      description: data.description,
+      image: data.image,
+      bounds: [[0,0],[data.boundsY, data.boundsX]],
+      plane: data.plane,
+    }
     try {
       setLoading(true);
       const { data: newMap } = await axios.post(
         `${process.env.REACT_APP_BLOG_API}/map`,
-        { setting: currentSetting._id, ...data },
+        myMapData,
         { headers: { authorization: `${authToken}` } }
       );
       setCurrentSetting(prev => ({ ...prev, maps: [newMap, ...prev.maps] }));
