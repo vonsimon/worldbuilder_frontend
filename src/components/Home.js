@@ -7,11 +7,12 @@ const Home = () => {
       <Col mb={4}></Col>
       <Col md={4}>
         <br />
-        <span className="text-light">
-          <h2>Test2!</h2>
+        <span className="text-dark">
+          <h4 className="text-center">Welcome to the</h4>
+          <h1 className="text-center">World Builder</h1>
         </span>
         <br />
-        <p className="text-light">
+        <p className="text-dark">
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
           nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
           sed diam voluptua. At vero eos et accusam et justo duo dolores et ea

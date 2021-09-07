@@ -30,14 +30,24 @@ const CreateSetting = () => {
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       {/* <Row>{error && <Alert variant='danger'>{error}</Alert>}</Row> */}
+      <Row className="justify-content-center">
+        <Col md={3}>
+          <span className="text-dark">
+            <br />
+            <h4 className="text-center">Create a new Setting!</h4>
+          </span>
+        </Col>
+      </Row>
       <Row>
         <Col></Col>
-        <Col>
-          <br />
+        <Col style={{
+            backgroundColor: "#9da5a8",
+          }} className="border border-dark">
+         
         <Form.Group className="mb-3">
           <Form.Label>
             {" "}
-            <span className="text-light">Title</span>
+            <span className="text-dark">Title</span>
           </Form.Label>
           <Form.Control
             type="text"
@@ -51,7 +61,7 @@ const CreateSetting = () => {
         <Form.Group className="mb-3">
           <Form.Label>
             {" "}
-            <span className="text-light">Description</span>
+            <span className="text-dark">Description</span>
           </Form.Label>
           <Form.Control
             type="text"
@@ -67,7 +77,7 @@ const CreateSetting = () => {
         <Form.Group className="mb-3">
           <Form.Label>
             {" "}
-            <span className="text-light">Image URL</span>
+            <span className="text-dark">Image URL</span>
           </Form.Label>
           <Form.Control
             type="text"
@@ -78,12 +88,14 @@ const CreateSetting = () => {
             <Alert variant="danger">{errors.image.message}</Alert>
           )}
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button style={{display: 'flex', justifyContent: 'center'}} variant="primary" type="submit">
           Submit
         </Button>
+         <br />
         </Col>
         <Col></Col>
       </Row>
+
     </Form>
   );
 };

@@ -37,8 +37,16 @@ const LogIn = () => {
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
     <Row>
+        <Col>
+          <br />
+        </Col>
+      </Row>
+    <Row>
       <Col></Col>
-      <Col>
+      <Col style={{
+            backgroundColor: "#9da5a8",
+          }} className="border border-dark"
+        >
         <br />
         
           <Row>{error && <Alert variant="danger">{error}</Alert>}</Row>
@@ -46,7 +54,7 @@ const LogIn = () => {
             <Form.Group className="mb-3" controlId="email">
               <Form.Label>
                 {" "}
-                <span className="text-light">Email</span>
+                <span className="text-dark">Email</span>
               </Form.Label>
               <Form.Control
                 type="email"
@@ -60,7 +68,7 @@ const LogIn = () => {
             <Form.Group className="mb-3" controlId="password">
               <Form.Label>
                 {" "}
-                <span className="text-light">Password</span>
+                <span className="text-dark">Password</span>
               </Form.Label>
               <Form.Control
                 type="password"
@@ -76,6 +84,11 @@ const LogIn = () => {
         <Button variant="primary" type="submit">
           Submit
         </Button>
+        <Row>
+        <Col>
+          <br />
+        </Col>
+      </Row>
       </Col>
       <Col></Col>
     </Row>

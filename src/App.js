@@ -22,7 +22,7 @@ const App = () => {
       <AuthState>
         <div
           style={{
-            backgroundColor: "#293133",
+            backgroundColor: "#ffefe3",
             minHeight: "100vh",
           }}
           expand="lg"
