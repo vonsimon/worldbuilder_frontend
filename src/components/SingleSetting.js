@@ -60,7 +60,6 @@ const SingleSetting = () => {
       <Modal style={{
             backgroundColor: "#0000",
           }}
-        
         size="xl"
         show={showSettings}
         onHide={() => {

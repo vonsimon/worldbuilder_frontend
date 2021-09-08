@@ -45,7 +45,7 @@ const SingleMap = () => {
   return !loading &&  map.image ? 
   (
     <Row>
-     <CustomMap url={map.image} bounds={map.bounds} />
+     <CustomMap url={map.image} bounds={map.bounds} marker={map.marker} />
     </Row>
   ): <Spinner animation="border" variant="primary" />
 };
