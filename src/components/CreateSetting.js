@@ -81,7 +81,7 @@ const CreateSetting = () => {
           </Form.Label>
           <Form.Control
             type="text"
-            placeholder="image URL"
+            placeholder="Image URL"
             {...register("image", { required: "Image URL is required" })}
           />
           {errors.image && (
