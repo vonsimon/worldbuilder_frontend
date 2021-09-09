@@ -12,6 +12,7 @@ import Alert from "react-bootstrap/Alert";
 import { SettingContext } from "../context/SettingContext";
 import CustomMap from "./CustomMap";
 import CreateMap from "./CreateMap";
+import Card from "react-bootstrap/Card";
 
 const SingleSetting = () => {
   const {
@@ -24,7 +25,7 @@ const SingleSetting = () => {
   } = useContext(SettingContext);
 
   const [showSettings, setShowSettings] = useState(false);
-  const { id } = useParams(); 
+  const { id } = useParams();
 
   useEffect(() => {
     getSingleSetting(id);
@@ -39,29 +40,85 @@ const SingleSetting = () => {
 
   return !loading && currentSetting ? (
     <Row>
-      <CreateMap show={showSettings}  setShow={setShowSettings} onSubmit={onSubmit}/>
+      <CreateMap
+        show={showSettings}
+        setShow={setShowSettings}
+        onSubmit={onSubmit}
+      />
       <Row>
         <span>
           <br />
         </span>
-        <h1 className="text-dark">{currentSetting.title}</h1>
-        <img
-          className="text-dark"
-          src={currentSetting.image}
-          alt={currentSetting.title}
-          height={"auto"}
-        />
-        <span>
+        <Col></Col>
+        <Col className="col-8">
           <br />
-        </span>
+          <h1 className="text-dark">{currentSetting.title}</h1>
+          <img
+            className="border rounded"
+            style={{
+              maxWidth: "100%",
+              height: "auto",
+            }}
+            src={currentSetting.image}
+            alt={currentSetting.title}
+            height={"auto"}
+          />
+        </Col>
+        <Col></Col>
       </Row>
+      <span>
+        <br />
+      </span>
       <Row>
-      <p className="text-dark">{currentSetting.description}</p>
+        <Col className="col-3"></Col>
+        
+        <Col
+          className="rounded"
+          style={{ background: "#FFFFFF"}}
+        >
+          <p className="text-dark">
+            <br />{currentSetting.description}</p><br />
         {/*<p className="text-light">{currentSetting.plane}</p>*/}
-        <span>
-          <br />
-        </span>
+      </Col>
+        
+        <Col className="col-3"></Col>
       </Row>
+      <span>
+        <br />
+      </span>
+      <Row> 
+      <Col className="col-2"></Col>
+            {currentSetting.maps.map((m) => (
+              
+              <Col>
+              <Card key={m._id}
+              style={{
+                backgroundColor: "#9da5a8"
+              }}
+              className="border border-dark">
+                 <Card.Body>
+          <Card.Title>
+            <h2>{m.title}</h2>
+          </Card.Title>
+         <Card.Img variant="top" className="border border-dark" style={{justifyContent: 'auto'}} src={m.image} alt={m.title} /> 
+          <Card.Text style={{overflow: "auto"}}>
+            {m.description}
+          </Card.Text>
+          <Button style={{display: 'flex', justifyContent: 'center'}} variant="primary" as={Link} to={`/map/${m._id}`} fluid>
+            More
+          </Button>
+          </Card.Body>
+              </Card>
+              </Col>
+             
+            ))}
+          
+          <Col className="col-2"></Col>
+        
+      </Row>
+      <span>
+        <br />
+      </span>
       <Row>
         <Col></Col>
         <Col>
@@ -74,18 +131,12 @@ const SingleSetting = () => {
         </Col>
         <Col></Col>
       </Row>
-      <Row>
-        <ul>
-          {currentSetting.maps.map((m) => (
-            <li key={m._id} className="text-light">
-              <Link to={`/map/${m._id}`}>{m.title}</Link>
-            </li>
-          ))}
-        </ul>
-      </Row>
+      <span>
+        <br />
+      </span>
     </Row>
   ) : (
-    <Row className='justify-content-center align-items-center vh-100'>
+    <Row className="justify-content-center align-items-center vh-100">
       <Spinner animation="border" variant="primary" />
     </Row>
   );

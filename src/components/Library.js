@@ -52,17 +52,18 @@ const Library = () => {
     <Col md={4} className="mb-4" key={setting._id}>
       <span><br /></span>
       <Card style={{
-              backgroundColor: "#9da5a8",
-              height: "100%",
+              backgroundColor: "#9da5a8"
             }}
             className="border border-dark">
         <Card.Body>
           <Card.Title>
-            {setting.title} <Badge bg="success">{setting.plane}</Badge>
+            <h2>{setting.title}</h2> <Badge bg="success">{setting.plane}</Badge>
           </Card.Title>
           <Card.Img variant="top" className="border border-dark" src={setting.image} alt={setting.title} />
           <Card.Text>
-            <h5>Description: {setting.description}</h5>
+          <br />
+            {setting.description}
+          <br />
           </Card.Text>
           <Button style={{display: 'flex', justifyContent: 'center'}} variant="primary" as={Link} to={`/setting/${setting._id}`} fluid>
             More
