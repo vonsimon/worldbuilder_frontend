@@ -12,6 +12,7 @@ import SingleMap from "./components/SingleMap.js";
 import ProtectedRoute from "./components/ProtectedRoute.js";
 import CreateSetting from "./components/CreateSetting.js";
 import SingleSetting from "./components/SingleSetting.js";
+import SingleMarker from "./components/SingleMarker.js";
 import AuthState from "./context/AuthContext.js";
 import SettingState from "./context/SettingContext";
 import "./App.css";
@@ -53,6 +54,7 @@ const App = () => {
                   <ProtectedRoute exact path="/setting" component={Setting} />
                   <ProtectedRoute exact path="/library" component={Library} />
                   <ProtectedRoute exact path="/map/:id" component={SingleMap} />
+                  <ProtectedRoute exact path="/marker/:id" component={SingleMarker} />
                 </SettingState>
               </Switch>
             </Row>

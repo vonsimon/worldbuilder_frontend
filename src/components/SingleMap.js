@@ -73,9 +73,11 @@ const SingleMap = () => {
   return !loading && map.image ? (
     <Row>
       <CustomMap
+        mapId={id}
         url={map.image}
         bounds={map.bounds}
         marker={map.marker}
+        setting={map.setting}
         onSubmit={onSubmit}
         markerType={markerType}
         setMarkerType={setMarkerType}

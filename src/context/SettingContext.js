@@ -55,8 +55,10 @@ const SettingState = ({ children }) => {
   };
 
   const createMap = async data => {
+    const setting = currentSetting ? currentSetting._id : data.setting
+
     const myMapData = {
-      setting: currentSetting._id, 
+      setting,
       title: data.title,
       description: data.description,
       image: data.image,
@@ -70,8 +72,9 @@ const SettingState = ({ children }) => {
         myMapData,
         { headers: { authorization: `${authToken}` } }
       );
-      setCurrentSetting(prev => ({ ...prev, maps: [newMap, ...prev.maps] }));
+      currentSetting &&  setCurrentSetting(prev => ({ ...prev, maps: [newMap, ...prev.maps] }));
       setLoading(false);
+      return newMap
     } catch (error) {
       if (error.response) {
         setError(error.response.data.error);
