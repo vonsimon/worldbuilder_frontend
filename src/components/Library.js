@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -42,7 +43,11 @@ const Library = () => {
   }, [error, authToken]);
 
   if (error) return <Alert variant="danger">{error}</Alert>;
-  if (loading) return <Spinner animation="border" variant="primary" />;
+  if (loading) return (
+    <Row className='justify-content-center align-items-center vh-100'>
+      <Spinner animation="border" variant="primary" />
+    </Row>
+  );
   return settings.map((setting) => (
     <Col md={4} className="mb-4" key={setting._id}>
       <span><br /></span>

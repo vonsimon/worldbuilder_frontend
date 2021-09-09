@@ -33,22 +33,30 @@ const LogIn = () => {
         }}
       />
     );
-  if (loading) return <Spinner animation="border" variant="primary" />;
+  if (loading)
+    return (
+      <Row className='justify-content-center align-items-center vh-100'>
+        <Spinner animation="border" variant="primary" />
+      </Row>
+    );
+
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-    <Row>
+      <Row>
         <Col>
           <br />
         </Col>
       </Row>
-    <Row>
-      <Col></Col>
-      <Col style={{
+      <Row>
+        <Col></Col>
+        <Col
+          style={{
             backgroundColor: "#9da5a8",
-          }} className="border border-dark"
+          }}
+          className="border border-dark"
         >
-        <br />
-        
+          <br />
+
           <Row>{error && <Alert variant="danger">{error}</Alert>}</Row>
           <Row>
             <Form.Group className="mb-3" controlId="email">
@@ -80,18 +88,18 @@ const LogIn = () => {
               )}
             </Form.Group>
           </Row>
-        
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-        <Row>
-        <Col>
-          <br />
+
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+          <Row>
+            <Col>
+              <br />
+            </Col>
+          </Row>
         </Col>
+        <Col></Col>
       </Row>
-      </Col>
-      <Col></Col>
-    </Row>
     </Form>
   );
 };

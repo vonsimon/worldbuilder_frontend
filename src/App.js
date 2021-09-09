@@ -28,7 +28,7 @@ const App = () => {
           expand="lg"
         >
           <Navigation />
-          <Container>
+          <Container fluid>
             <Row>
               <Switch>
                 <Route exact path="/" component={Home} />

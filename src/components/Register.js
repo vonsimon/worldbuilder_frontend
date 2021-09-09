@@ -36,7 +36,11 @@ const Register = () => {
       />
     );
 
-  if (loading) return <Spinner animation="border" variant="primary" />;
+  if (loading) return (
+    <Row className='justify-content-center align-items-center vh-100'>
+      <Spinner animation="border" variant="primary" />
+    </Row>
+  );
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Row>

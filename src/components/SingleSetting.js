@@ -7,6 +7,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import Spinner from "react-bootstrap/Spinner";
 import Alert from "react-bootstrap/Alert";
 import { SettingContext } from "../context/SettingContext";
 import CustomMap from "./CustomMap";
@@ -250,7 +251,9 @@ const SingleSetting = () => {
       </Row>
     </Row>
   ) : (
-    "Loading"
+    <Row className='justify-content-center align-items-center vh-100'>
+      <Spinner animation="border" variant="primary" />
+    </Row>
   );
 };
 
