@@ -3,6 +3,7 @@ import { Marker, Popup, useMapEvents } from "react-leaflet";
 import { useForm } from "react-hook-form";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
+import uploadPicture from '../utils/uploadPicture';
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Form from "react-bootstrap/Form";
 import CreateMap from './CreateMap'
@@ -33,13 +34,22 @@ const CreateMarker = ({
     register,
     handleSubmit,
     reset,
+    setValue,
+    watch,
+    setError,
     formState: { errors },
   } = useForm();
+
+  
+  const watchImage = watch('image');
 
   const renderForm = () => {
     if (markerType === "Landmark") {
       return (
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit((data)=>{
+          onSubmit(data) 
+          reset()
+        })}>
           <Form.Group className="mb-3" controlId="Title">
             <Form.Label>
               {" "}
@@ -70,20 +80,12 @@ const CreateMarker = ({
               <Alert variant="danger">{errors.description.message}</Alert>
             )}
           </Form.Group>
-          <Form.Group className="mb-3" controlId="Image">
-            <Form.Label>
-              {" "}
-              <span className="text-dark">Image</span>
-            </Form.Label>
-            <Form.Control
-              type="Landmark"
-              placeholder="Image"
-              {...register("image", { required: "Image is required" })}
-            />
-            {errors.image && (
-              <Alert variant="danger">{errors.image.message}</Alert>
-            )}
+          <Form.Group className='mb-3'>
+            <Form.Label>Upload picture</Form.Label>
+            <Form.Control type='file' onChange={e => uploadPicture(e, setValue, setError)} />
+            {errors.image && <Alert variant='danger'>{errors.image.message}</Alert>}
           </Form.Group>
+          {watchImage && <img src={watchImage} alt='preview' className='img-fluid' />}
           <Form.Group className="mb-3" controlId="Background">
             <Form.Label>
               {" "}
@@ -111,7 +113,10 @@ const CreateMarker = ({
       );
     } else if (markerType === "Character") {
       return (
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit((data)=>{
+          onSubmit(data) 
+          reset()
+        })}>
           <Form.Group className="mb-3" controlId="Title">
             <Form.Label>
               {" "}
@@ -142,20 +147,12 @@ const CreateMarker = ({
               <Alert variant="danger">{errors.description.message}</Alert>
             )}
           </Form.Group>
-          <Form.Group className="mb-3" controlId="Image">
-            <Form.Label>
-              {" "}
-              <span className="text-dark">Image</span>
-            </Form.Label>
-            <Form.Control
-              type="Character"
-              placeholder="Image"
-              {...register("image", { required: "Image is required" })}
-            />
-            {errors.image && (
-              <Alert variant="danger">{errors.image.message}</Alert>
-            )}
+          <Form.Group className='mb-3'>
+            <Form.Label>Upload picture</Form.Label>
+            <Form.Control type='file' onChange={e => uploadPicture(e, setValue, setError)} />
+            {errors.image && <Alert variant='danger'>{errors.image.message}</Alert>}
           </Form.Group>
+          {watchImage && <img src={watchImage} alt='preview' className='img-fluid' />}
           <Form.Group className="mb-3" controlId="Background">
             <Form.Label>
               {" "}

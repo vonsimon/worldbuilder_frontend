@@ -67,6 +67,7 @@ const SingleMap = () => {
       }
     };
     !error && getMap();
+    return  () => setMap({})
   }, [id, error, authToken]);
 
   if (error) return <Alert variant="danger">{error}</Alert>;

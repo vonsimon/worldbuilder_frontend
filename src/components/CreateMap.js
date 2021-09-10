@@ -4,6 +4,7 @@ import { v4 as uuid_v4 } from "uuid";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import uploadPicture from '../utils/uploadPicture';
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
@@ -25,10 +26,10 @@ const CreateMap = ({show, setShow, onSubmit}) => {
         handleSubmit,
         watch,
         reset,
+        setValue,
+        setError,
         formState: { errors },
       } = useForm({ defaultValues });
-
-      const [error, setError] = useState(null)
     
       const watchImage = watch("image", "");
       const watchBoundsX = watch("boundsX", "");
@@ -58,7 +59,6 @@ const CreateMap = ({show, setShow, onSubmit}) => {
         <Col>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <Modal.Body>
-              <Row>{error && <Alert variant="danger">{error}</Alert>}</Row>
               <Row>
                 <Form.Group className="mb-3">
                   <Form.Label>Title</Form.Label>
@@ -84,18 +84,10 @@ const CreateMap = ({show, setShow, onSubmit}) => {
                     <Alert variant="danger">{errors.description.message}</Alert>
                   )}
                 </Form.Group>
-                <Form.Group className="mb-3">
-                  <Form.Label>Image URL</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="image URL"
-                    {...register("image", {
-                      required: "Image URL is required",
-                    })}
-                  />
-                  {errors.image && (
-                    <Alert variant="danger">{errors.image.message}</Alert>
-                  )}
+                <Form.Group className='mb-3'>
+                  <Form.Label>Upload picture</Form.Label>
+                  <Form.Control type='file' onChange={e => uploadPicture(e, setValue, setError)} />
+                  {errors.image && <Alert variant='danger'>{errors.image.message}</Alert>}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="plane">
                   <Form.Label>Plane:</Form.Label>

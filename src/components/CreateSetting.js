@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 import { Redirect } from "react-router-dom";
+import uploadPicture from '../utils/uploadPicture';
 import { SettingContext } from "../context/SettingContext";
 
 const CreateSetting = () => {
@@ -18,8 +19,13 @@ const CreateSetting = () => {
   const {
     register,
     handleSubmit,
+    setValue,
+    setError,
+    watch, 
     formState: { errors },
   } = useForm({ defaultValues });
+
+  const watchImage = watch('image')
 
   const onSubmit = (data) => {
     postSetting(data);
@@ -74,20 +80,12 @@ const CreateSetting = () => {
             <Alert variant="danger">{errors.description.message}</Alert>
           )}
         </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>
-            {" "}
-            <span className="text-dark">Image URL</span>
-          </Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Image URL"
-            {...register("image", { required: "Image URL is required" })}
-          />
-          {errors.image && (
-            <Alert variant="danger">{errors.image.message}</Alert>
-          )}
-        </Form.Group>
+        <Form.Group className='mb-3'>
+            <Form.Label>Upload picture</Form.Label>
+            <Form.Control type='file' onChange={e => uploadPicture(e, setValue, setError)} />
+            {errors.image && <Alert variant='danger'>{errors.image.message}</Alert>}
+          </Form.Group>
+          {watchImage && <img src={watchImage} alt='preview' className='img-fluid' />}
         <Button style={{display: 'flex', justifyContent: 'center'}} variant="primary" type="submit">
           Submit
         </Button>
